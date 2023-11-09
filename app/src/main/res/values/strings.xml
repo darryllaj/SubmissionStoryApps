@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">SubmissionStoryApps</string>
+    <string name="dateCreated">Publikasi Pada:</string>
+    <string name="judul">Judul</string>
+    <string name="desc">Desc :</string>
+    <string name="isidesc">Isi Desc :</string>
+    <string name="camera_x">CameraX</string>
+    <string name="camera">Kamera</string>
+    <string name="gallery">Galeri</string>
+    <string name="upload">Unggah</string>
+    <string name="empty_image_warning">Silakan masukkan berkas gambar terlebih dahulu.</string>
+</resources>
