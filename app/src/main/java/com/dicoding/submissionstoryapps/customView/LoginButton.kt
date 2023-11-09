@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.Gravity
 import androidx.appcompat.widget.AppCompatButton
-import androidx.constraintlayout.widget.R
 import androidx.core.content.ContextCompat
 
 class LoginButton: AppCompatButton {
