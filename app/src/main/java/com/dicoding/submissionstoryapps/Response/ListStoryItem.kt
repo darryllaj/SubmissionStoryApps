@@ -1,7 +1,10 @@
 package com.dicoding.submissionstoryapps.Response
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = "storylist")
 data class ListStoryItem(
 
 	@field:SerializedName("photoUrl")
@@ -17,11 +20,12 @@ data class ListStoryItem(
 	val description: String? = null,
 
 	@field:SerializedName("lon")
-	val lon: Any? = null,
+	val lon: Double? = null,
 
+	@PrimaryKey
 	@field:SerializedName("id")
-	val id: String? = null,
+	val id: String,
 
 	@field:SerializedName("lat")
-	val lat: Any? = null
+	val lat: Double? = null
 )

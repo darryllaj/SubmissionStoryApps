@@ -2,6 +2,7 @@ package com.dicoding.submissionstoryapps.story
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -9,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.dicoding.submissionstoryapps.Response.ListStoryItem
 import com.dicoding.submissionstoryapps.databinding.ItemStoryBinding
 
-class StoryAdapter(private val listStory: List<ListStoryItem>): ListAdapter<ListStoryItem,StoryAdapter.UserViewHolder>(DIFF_CALLBACK) {
+class StoryAdapter(): PagingDataAdapter<ListStoryItem,StoryAdapter.UserViewHolder>(DIFF_CALLBACK) {
 
     private var onItemClickCallback: OnItemClickCallback? = null
 
@@ -36,13 +37,15 @@ class StoryAdapter(private val listStory: List<ListStoryItem>): ListAdapter<List
         return UserViewHolder(binding)
     }
 
-    override fun getItemCount(): Int {
-        return listStory.size
-    }
+//    override fun getItemCount(): Int {
+//        return listStory.size
+//    }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        val story = listStory[position]
-        holder.bind(story)
+        val story = getItem(position)
+        if (story != null){
+            holder.bind(story)
+        }
     }
     companion object {
         val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ListStoryItem>() {

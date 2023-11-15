@@ -7,6 +7,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.submissionstoryapps.R
 import com.dicoding.submissionstoryapps.Response.ListStoryItem
@@ -25,16 +26,17 @@ class StoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityStoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setStory()
 
-        viewModel.listStory.observe(this){
-            setStory(it)
-        }
-        lifecycleScope.launch {
-            viewModel.getAllStory()
-        }
-        viewModel.isLoading.observe(this){
-            showLoading(it)
-        }
+//        viewModel.listStory.observe(this){
+//            setStory()
+//        }
+//        lifecycleScope.launch {
+//            viewModel.getAllStory()
+//        }
+//        viewModel.isLoading.observe(this){ data->
+//            showLoading(data)
+//        }
         binding.floatAdd.setOnClickListener {
             val intent = Intent(this, AddStoryActivity::class.java)
             startActivity(intent)
@@ -63,8 +65,16 @@ class StoryActivity : AppCompatActivity() {
             }
         }
     }
-    private fun setStory(storyItems: List<ListStoryItem>){
-        val adapter = StoryAdapter(storyItems)
+    private fun setStory(){
+        val adapter = StoryAdapter()
+        binding.rvListStory.adapter = adapter.withLoadStateFooter(
+            footer = LoadingStateAdapter{
+                adapter.retry()
+            }
+        )
+        viewModel.listStory.observe(this){
+            adapter.submitData(lifecycle,it)
+        }
         binding.rvListStory.setHasFixedSize(true)
         binding.rvListStory.layoutManager = LinearLayoutManager(this)
         binding.rvListStory.adapter = adapter
@@ -79,10 +89,9 @@ class StoryActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
             }
-
         })
     }
-    private fun showLoading(isLoading: Boolean) {
-        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
-    }
+//    private fun showLoading(isLoading: Boolean) {
+//        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+//    }
 }

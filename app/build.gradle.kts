@@ -38,6 +38,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+        freeCompilerArgs = freeCompilerArgs + listOf(
+            "-Xopt-in=kotlin.RequiresOptIn"
+        )
     }
 }
 
@@ -65,7 +68,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0")
     implementation("androidx.activity:activity-ktx:1.3.1")
     implementation("androidx.fragment:fragment-ktx:1.3.1")
-//    implementation ("com.google.android.gms:play-services-metadata:17.0.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
+    implementation("androidx.room:room-paging:2.4.0-rc01")
+    implementation ("androidx.paging:paging-runtime-ktx:3.1.0")
 }
